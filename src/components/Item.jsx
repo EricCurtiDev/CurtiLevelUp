@@ -4,11 +4,14 @@ import { Link } from 'react-router-dom';
 
 const Item = ({producto}) => {
     return (
-        <div>
-            <img src={producto.img} alt={producto.name} />
-            <p>{producto.name}</p>
-            <p>${producto.price},00</p>
-            <Link to={`/item/${producto.id}`} className='btn btn-primary'>See More</Link>
+        <div className='itemCard'>
+            <img src={producto.img} 
+            alt={producto.name} 
+            className='itemImage'
+            />
+            <h3 className='itemName'>{producto.name}</h3>
+            <p className='itemPrice'>${producto.price},00</p>
+            <Link to={`/item/${producto.id}`} className='seeMoreBtn'>See More</Link>
         </div>
     )
 }
@@ -16,8 +19,14 @@ const Item = ({producto}) => {
 Item.propTypes = {
     producto: PropTypes.shape({
         name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        stock: PropTypes.number.isRequired,
+        price: PropTypes.oneOfType([  // Accept both string and number
+            PropTypes.string,
+            PropTypes.number
+        ]).isRequired,
+        stock: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]).isRequired,
         img: PropTypes.string.isRequired
     }).isRequired
 }

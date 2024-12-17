@@ -11,14 +11,14 @@ const ItemCounter = ({stock, initial, onAdd}) => {
     }
 
     const restar = () =>{
-        if(count > 0 ){
+        if(count > 1){  // Cambiado de 0 a 1 para evitar cantidades de 0
             setCount(count - 1)
         }       
     }
 
     const onAddHandler = () =>{
-        if (stock !== 0){
-        onAdd(count)
+        if (stock !== 0 && count > 0){  // Verificación adicional
+            onAdd(count)
         }
     }
 
@@ -29,7 +29,13 @@ const ItemCounter = ({stock, initial, onAdd}) => {
                 <span className='btn'>{count}</span>
                 <button className='btn btn-primary' onClick={sumar}>+</button>
             </div>
-            <button className='btn btn-primary' onClick={onAddHandler} disabled={count === 0}>Add to cart</button>
+            <button 
+                className='btn btn-primary' 
+                onClick={onAddHandler} 
+                disabled={count === 0 || stock === 0}  // Deshabilitar si no hay stock
+            >
+                Add to cart
+            </button>
         </>
     )
 }
@@ -38,6 +44,10 @@ ItemCounter.propTypes = {
     stock: PropTypes.number.isRequired,
     initial: PropTypes.number.isRequired,
     onAdd: PropTypes.func.isRequired
+}
+
+ItemCounter.defaultProps = {
+    initial: 1
 }
 
 export default ItemCounter
