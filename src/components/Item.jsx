@@ -19,7 +19,7 @@ const Item = ({producto}) => {
 Item.propTypes = {
     producto: PropTypes.shape({
         name: PropTypes.string.isRequired,
-        price: PropTypes.oneOfType([  // Accept both string and number
+        price: PropTypes.oneOfType([  
             PropTypes.string,
             PropTypes.number
         ]).isRequired,

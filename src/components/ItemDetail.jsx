@@ -3,10 +3,13 @@ import ItemCounter from './ItemCounter';
 import { CartContext } from '../context/CartContext';
 
 const ItemDetail = ({ producto }) => {
-    const { addItem, getUpdatedStock } = useContext(CartContext);  // Ensure you are using useContext correctly
+    const { addItem, getUpdatedStock } = useContext(CartContext);  
 
-    // Get the updated stock for the product
-    const stockActual = getUpdatedStock(producto.id, producto.stock);  // Ensure this line is present
+    
+    const handleAddToCart = () => {
+        addItem(producto, 1); 
+        getUpdatedStock(producto.id, 1);
+    };  
 
     const onAdd = (cantidad) => {
         addItem(producto, cantidad);
@@ -20,6 +23,7 @@ const ItemDetail = ({ producto }) => {
             <p>{producto.description}</p>
             <p>Stock: {producto.stock}</p>
             <p>${producto.price},00</p>
+            <button onClick={handleAddToCart}>Add to Cart</button>
             <ItemCounter 
                 stock={producto.stock}
                 initial={1} 

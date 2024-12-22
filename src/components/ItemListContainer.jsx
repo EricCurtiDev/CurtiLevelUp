@@ -1,6 +1,5 @@
 import{useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
-import { getProducts } from '../mock/api'
 import ItemList from './ItemList'
 import { useParams } from 'react-router-dom'
 import { collection, getDocs, query, where } from 'firebase/firestore'
@@ -14,11 +13,11 @@ const ItemListContainer = ({greeting}) => {
     /* FIREBASE */
     useEffect(()=>{
         setLoading(true)
-        //Conectamos por nuestra colección
+        
         const productsCollection = categoryId
         ? query(collection(db, "productos"), where("category", "==", categoryId)) 
         : collection(db, "productos")
-        //Pedir docs
+        
         getDocs(productsCollection)
         .then((res)=> {
             const list = res.docs.map((product)=>{
@@ -32,22 +31,6 @@ const ItemListContainer = ({greeting}) => {
         .catch((error)=> console.log(error))
         .finally(()=> setLoading(false))
     },[categoryId])
-
-
-    //MOCK LOCAL
-/*     useEffect(()=>{
-        getProducts()
-        .then((res)=>{
-            if(categoryId){
-                setItems(res.filter((producto) => producto.category === categoryId))
-            }else{
-                setItems(res)
-            }
-        })
-        .catch((error)=> console.log(error))
-    },[categoryId]) */
-
-
 
     return(
         <div>

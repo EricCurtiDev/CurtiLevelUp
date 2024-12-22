@@ -24,12 +24,7 @@ const ItemDetailContainer = () => {
         .catch((error)=> console.log(error))
         .finally(()=> setLoading(false))
     },[])
-    /* useEffect(()=>{
-        getOneProduct(id)
-        .then((res)=> setProducto(res))
-        .catch((error)=> console.log(error))
-    },[id])
-    console.log(producto) */
+    
     return(
         <div>
             <ItemDetail producto={producto}/>

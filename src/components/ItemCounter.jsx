@@ -11,13 +11,13 @@ const ItemCounter = ({stock, initial, onAdd}) => {
     }
 
     const restar = () =>{
-        if(count > 1){  // Cambiado de 0 a 1 para evitar cantidades de 0
+        if(count > 1){  
             setCount(count - 1)
         }       
     }
 
     const onAddHandler = () =>{
-        if (stock !== 0 && count > 0){  // Verificación adicional
+        if (stock !== 0 && count > 0){  
             onAdd(count)
         }
     }
@@ -32,7 +32,7 @@ const ItemCounter = ({stock, initial, onAdd}) => {
             <button 
                 className='btn btn-primary' 
                 onClick={onAddHandler} 
-                disabled={count === 0 || stock === 0}  // Deshabilitar si no hay stock
+                disabled={count === 0 || stock === 0} 
             >
                 Add to cart
             </button>
